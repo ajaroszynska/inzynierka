@@ -1,12 +1,15 @@
 # https://github.com/CreepyD246/OpenCV-Shape-Detection-Example/blob/main/ShapeDetection.py
 
-# On Windows 11, you need to install OpenCV first.
-# Open a terminal (Command Prompt or PowerShell) and run:
-# pip install opencv-python
+'''
+ TO DO:
+- determine which detected shape is the biggest
+- mark only one, the biggest shape - noise cancelling 
+- MAYBE: detect and delete QR codes?
+'''
 
 import cv2  # OpenCV library for image processing
 
-image = cv2.imread("test1.png")
+image = cv2.imread(".\\test1.png")
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # Setting a threshold value to create a new image
@@ -19,6 +22,10 @@ cv2.waitKey(0)
 
 # Retrieving outer-edge coordinates from the thresholded image
 contours, hierarchy = cv2.findContours(thresh_image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+print("contours:")
+print(contours)
+print("hierarchy")
+print(hierarchy)
 
 # Iterating through each contour to retrieve coordinates of each shape
 for i, contour in enumerate(contours):
