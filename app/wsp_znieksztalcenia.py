@@ -89,7 +89,7 @@ def wsp_znieksztalcenia(zdjecia, sciezka, wymiar1=8, wymiar2=5):
     print(avg_new_mtx)
 
 
-    #return mtx, dist, new_cam_mtx
+    return mtx, dist, new_cam_mtx, roi
 
     # # undistort
     # dst = cv2.undistort(zdj, mtx, dist, None, new_cam_mtx)
@@ -100,5 +100,3 @@ def wsp_znieksztalcenia(zdjecia, sciezka, wymiar1=8, wymiar2=5):
     # dst = dst[y:y+h, x:x+w]
     # cv2.imwrite(sciezka + 'calibres.png', dst)
     # print('undistorted')
-    
-    return

@@ -7,7 +7,8 @@ def detekcja_ksztaltu(zdj_sciezka, thresh ):
 
     # Konwersja do obrazu czarno białego bez skali szarości
     _, zdj_thresh = cv2.threshold(gray, thresh, 255, cv2.THRESH_BINARY)
-    cv2.imshow("zdj thresh", zdj_thresh)
+    resize = cv2.resize(zdj_thresh, (267, 200))
+    cv2.imshow("zdj thresh", resize)
     cv2.waitKey(100)
 
     # Szukanie konturów i detekcja największego kształtu
@@ -17,15 +18,22 @@ def detekcja_ksztaltu(zdj_sciezka, thresh ):
     for i, k in enumerate(kontury):
         # Pole powierzchni konturu
         pola.append(cv2.contourArea(k))
+    try:
+        obj_pole = max(pola)
+        obj_index = pola.index(obj_pole)
+    except:
+        print("No objects found")
+        check = False
+        ksztalt = 0
+        coords = 0
+        return check, ksztalt, coords
     
-    obj_pole = max(pola)
-    obj_index = pola.index(obj_pole)
     print("Najwiekszy ksztalt ma obszar: pola[{}] = {}".format(obj_index, obj_pole))
 
     # Przyblizenie ksztaltu aby wyeliminować szumy i niedokładności
     obj_kontur = kontury[obj_index]
 
-    eps = 0.01 * cv2.arcLength(obj_kontur, True)
+    eps = 0.1 * cv2.arcLength(obj_kontur, True)
     approx = cv2.approxPolyDP(obj_kontur, eps, True)
     cv2.drawContours(zdj, obj_kontur, -1, (255,0,0), 8)
 
