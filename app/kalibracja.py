@@ -35,7 +35,7 @@ zdjecia_kalibracja = glob.glob(sciezka_zapisu + "dist_cal*.jpg")
 # Wybór liczby obiektów kalibracji
 
 n_obiekt = int(input("Liczba obiektow kalibracji: "))
-zdj = glob.glob(sciezka_zapisu + "object_*.jpg")
+zdj = glob.glob(sciezka_zapisu + "object_1?.jpg")
 # zdj = glob.glob(".\\test_img\\pieciokat_test*.jpg")
 # Pięciokąty:
 # zdj = [".\\test_img\\cal_img\\object_1.jpg", ".\\test_img\\cal_img\\object_3.jpg", ".\\test_img\\cal_img\\object_6.jpg"]
@@ -51,8 +51,9 @@ cv2.resizeWindow("Kalibracja", 668, 500)
 
 # Wybór kształtu i koloru kolejnego obiektu 
 while n_obiekt:
-    thresh_ksztalt = 255
+    thresh_ksztalt = 79
     spr_wybor = 1
+    print(zdj[i])
     # Wybor ksztaltu
     while(spr_wybor):
         ksztalt = input("Ksztalt podstawy: [p - prostokat, t - trójkat, k - pięciokąt]: ")
@@ -97,8 +98,8 @@ while n_obiekt:
     # thresh_ksztalt_temp = thresh_ksztalt
 
     while True:
-        thresh_ksztalt -= 1
-        if thresh_ksztalt <= 0:
+        thresh_ksztalt += 1
+        if thresh_ksztalt >= 255:
             break
 
         check, ksztalt, coords, zdj_ksztalt, tekst = detekcja_ksztaltu(zdj[i], thresh_ksztalt)
@@ -118,10 +119,10 @@ while n_obiekt:
                 case 't':
                     break
                 case 'n':
-                    thresh_ksztalt -= 5
+                    thresh_ksztalt += 5
                     continue
     thresh_ksztalt_wyniki.append(thresh_ksztalt)
-
+    # [54, 54, 47, 73, 79, 76, 53, 35, 32]
     # while ksztalt != ksztalt_wybor and thresh_ksztalt_temp >= 0:
     #     thresh_ksztalt_temp -= 1
     #     check, ksztalt, coords = detekcja_ksztaltu(zdj[i], thresh_ksztalt_temp)

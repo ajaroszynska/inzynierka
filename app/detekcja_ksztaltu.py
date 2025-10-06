@@ -6,7 +6,7 @@ def detekcja_ksztaltu(zdj_sciezka, thresh ):
     gray = cv2.cvtColor(zdj, cv2.COLOR_BGR2GRAY)
 
     # Konwersja do obrazu czarno białego bez skali szarości
-    _, zdj_thresh = cv2.threshold(gray, thresh, 255, cv2.THRESH_BINARY)
+    _, zdj_thresh = cv2.threshold(gray, thresh, 255, cv2.THRESH_BINARY_INV)
     # resize = cv2.resize(zdj_thresh, (267, 200))
     # cv2.imshow("zdj thresh", resize)
     # cv2.waitKey(100)
