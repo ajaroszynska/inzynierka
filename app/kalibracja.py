@@ -15,18 +15,18 @@ sciezka_zapisu = "./test_img/cal_img/" # placeholder - w linuksie inaczej jest
 # zdjecia_kalibracja = ['D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_0.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_1.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_2.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_3.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_4.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_5.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_6.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_7.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_8.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_9.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_10.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_11.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_12.jpg', 'D:\\studia\\inzynierka\\app\\test_img\\cal_img\\cal_test_13.jpg']
 zdjecia_kalibracja = glob.glob(sciezka_zapisu + "dist_cal*.jpg")
 # print(zdjecia_kalibracja)
-# mtx, dist, new_cam_mtx, roi = wsp_znieksztalcenia(zdjecia_kalibracja, sciezka_zapisu)
+mtx, dist, new_cam_mtx, roi = wsp_znieksztalcenia(zdjecia_kalibracja, sciezka_zapisu)
 
 # undistort
-# zdj = cv2.imread(zdjecia_kalibracja[0])
+zdj = cv2.imread(zdjecia_kalibracja[0])
 # print(zdjecia_kalibracja[0])
-# dst = cv2.undistort(zdj, mtx, dist, None, new_cam_mtx)
+dst = cv2.undistort(zdj, mtx, dist, None, new_cam_mtx)
 
 # crop the image
-# x, y, w, h = roi
-# print(roi)
-# dst = dst[y:y+h, x:x+w]
-# cv2.imwrite(sciezka_zapisu + 'dist_calibres0.png', dst)
+x, y, w, h = roi
+print(roi)
+dst = dst[y:y+h, x:x+w]
+cv2.imwrite(sciezka_zapisu + 'dist_calibres0.png', dst)
 
 # Wyprostuj obraz
 
@@ -51,12 +51,12 @@ cv2.resizeWindow("Kalibracja", 668, 500)
 
 # Wybór kształtu i koloru kolejnego obiektu 
 while n_obiekt:
-    thresh_ksztalt = 79
+    thresh_ksztalt = 0
     spr_wybor = 1
     print(zdj[i])
     # Wybor ksztaltu
     while(spr_wybor):
-        ksztalt = input("Ksztalt podstawy: [p - prostokat, t - trójkat, k - pięciokąt]: ")
+        ksztalt = input("Ksztalt podstawy: [p - czworobok, t - trójkat, k - pięciokąt]: ")
         match ksztalt:
             case 'p':
                 ksztalt_wybor = 4

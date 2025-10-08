@@ -58,7 +58,7 @@ def detekcja_ksztaltu(zdj_sciezka, thresh ):
         # Prostokąt
         ksztalt = 4
         check = True
-        tekst = "Prostokat"
+        tekst = "Czworobok"
     elif len(approx) == 5:
         # Pięciokąt
         ksztalt = 5
