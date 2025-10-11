@@ -5,7 +5,7 @@ c = cv2.VideoCapture(0)
 while(True):
     _, frame = c.read()
     mirror = cv2.flip(frame, 1)
-    r = cv2.resize(mirror, (600, 400))
+    r = cv2.resize(mirror, (640, 480))
     
     cv2.imshow('okienko', r)
     

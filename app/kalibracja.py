@@ -3,7 +3,9 @@ import glob
 from zapisz_n_zdjec import *
 from wsp_znieksztalcenia import *
 from detekcja_ksztaltu import *
+from wyznacz_punkty import *
 
+'''
 # Skrypt kalibracji kamery
 
 # Wyznacz współczynniki zniekształcenia i macierz kamery
@@ -147,3 +149,9 @@ while n_obiekt:
 # Zapis wartości do listy
 
 # Wyznaczenie wartości progowej
+
+
+'''
+# Wyznaczenie przesunięcia układu współrzędnych
+pdq = np.array([[500, 500], [800, 900], [1300, 530]])
+wyznacz_punkty(3, 2, pdq)
