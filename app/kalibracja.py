@@ -1,9 +1,11 @@
 import cv2
 import glob
+import math
 from zapisz_n_zdjec import *
 from wsp_znieksztalcenia import *
 from detekcja_ksztaltu import *
 from wyznacz_punkty import *
+from konwersja_wspolrzednych import *
 
 '''
 # Skrypt kalibracji kamery
@@ -153,5 +155,21 @@ while n_obiekt:
 
 '''
 # Wyznaczenie przesunięcia układu współrzędnych
-pdq = np.array([[500, 500], [800, 900], [1300, 530]])
-wyznacz_punkty(3, 2, pdq)
+# pdq = np.array([[500, 500], [800, 900], [1300, 530]])
+# wyznacz_punkty(3, 2, pdq)
+
+pxy = np.array([[1000, 2000],[399.3908, 2265.0578],[-582.3429, 2173.3331]])
+pdq = np.array([[1866.0254, 1232.0508],[1470.4669, 1761.9022],[582.3429, 2173.3331]])
+
+sin, cos, t = konwersja_ukladow(pxy, pdq)
+print('-------')
+print(sin)
+print(cos)
+print(t)
+
+print('================================')
+p2 = konwertuj_wspolrzedne(sin, cos, t, pdq)
+print(p2)
+
+p2 = konwertuj_wspolrzedne(math.sin(math.pi/6), math.cos(math.pi/6), [0.0, 0.0], pdq)
+print(p2)
